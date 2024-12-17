@@ -1,7 +1,9 @@
 import Phaser, { Physics } from "phaser";
 import Laser from "../entities/Laser";
+import { level1,questions } from "../data/wordData";
 
-export default class PlayScene extends Phaser.Scene {
+
+export default class Level1Scene extends Phaser.Scene {
     player: Phaser.Physics.Arcade.Image | null;
     stone: Phaser.Physics.Arcade.Image;
     stone2: Phaser.Physics.Arcade.Image;
@@ -12,18 +14,36 @@ export default class PlayScene extends Phaser.Scene {
     inputEnabled: boolean; 
     laserGroup: Phaser.Physics.Arcade.Group;
     isTrue:boolean;
+    dataNo:number
+    questionNo:number
+    question:Phaser.GameObjects.Text
+    questionContent:number
 
 
     constructor() {
-        super("play-scene");
+        super("level1-scene");
         this.inputEnabled = true; 
         this.player=null
+        this.dataNo=0
+        this.questionContent=0
+    }
+
+    preload() {
+        for (let i = 0; i < level1.length; i++) {
+            for (let j = 0; j < level1[i].length; j++) {
+                const image = level1[i][j];
+                this.load.image(image.name, image.src);
+            }
+        }
     }
 
     create(): void {
         // Background
         this.bg = this.add.image(0, 0, "bg").setOrigin(0, 0);
         this.bg.setScale(1.5, 1.5);
+
+        //text
+        this.question=this.add.text(50,30,questions[0][this.questionContent])
 
         // Player
         this.player = this.physics.add.image(50, 350, "player");
@@ -33,9 +53,13 @@ export default class PlayScene extends Phaser.Scene {
         this.player.setCollideWorldBounds(true);
         this.player.setImmovable(true);
 
+
         // Stone
-        this.stone = this.physics.add.image(950, 350, "largeStone");
-        this.stone2 = this.physics.add.image(950, 440, "medStone");
+        this.stone = this.physics.add.image(950, 350, `${level1[this.dataNo][0].name}`);
+        this.stone2 = this.physics.add.image(950, 440, `${level1[this.dataNo][1].name}`);
+        this.stone.setScale(0.3,0.3)
+        this.stone2.setScale(0.3,0.3)
+
 
         this.stone.setVelocityX(-20);
         this.stone2.setVelocityX(-20);
@@ -66,16 +90,21 @@ export default class PlayScene extends Phaser.Scene {
                 const laserInstance = laser as Laser;
                 const meteorInstance = meteor as Phaser.Physics.Arcade.Image ;
                 laserInstance.destroy()
-                meteorInstance.destroy()
-                console.log(stone[i].texture.key)
-                if(i===0){
-                    this.stone2.setVelocity(0)
+                meteorInstance.setVisible(false)
+                // console.log(stone[i].texture.key)
+                if(stone[i].texture.key===questions[0][this.questionContent]){
+                    this.questionContent+=1
+                    console.log(this.questionContent)
+                    this.question.setText(questions[0][this.questionContent])
+                    this.dataNo+=1
+                    
 
-                }else{
-                    this.stone.setVelocity(0)
                 }
+              
                 this.inputEnabled=false
               });
+
+              
           }
           // Then use it like this:
     

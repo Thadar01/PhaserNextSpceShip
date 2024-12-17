@@ -2,6 +2,7 @@
 import { AUTO, Game } from 'phaser';
 import PreLoaderScene from './scenes/PreLoaderScene';
 import PlayScene from './scenes/PlayScene';
+import Level1Scene from './scenes/Level1Scene';
 
 
 //  Find out more information about the Game Config at:
@@ -22,7 +23,8 @@ const config: Phaser.Types.Core.GameConfig = {
     },
     scene: [
        PreLoaderScene,
-       PlayScene
+       PlayScene,
+       Level1Scene
     ]
 };
 
