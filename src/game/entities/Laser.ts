@@ -8,7 +8,7 @@ export default class Laser extends Phaser.Physics.Arcade.Sprite {
     super(scene, x, y, 'laser');
 
     this.speed = Phaser.Math.GetSpeed(500, 1);
-    this.setScale(0.6);
+    this.setScale(1.5);
   }
 
   // fire method should take x, y, and direction as arguments
@@ -27,7 +27,7 @@ export default class Laser extends Phaser.Physics.Arcade.Sprite {
     this.y += Math.sin(this.direction) * this.speed * delta;
 
     // Check if laser is out of bounds and deactivate it
-    if (this.x < -50 || this.y < -50 || this.x > 800 || this.y > 600) {
+    if (this.x < -50 || this.y < -50 || this.x > 1000 || this.y > 600) {
       this.setActive(false);
       this.setVisible(false);
       this.destroy();
