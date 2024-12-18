@@ -16,7 +16,7 @@ export default class PreLoaderScene extends Phaser.Scene{
    }
 
    create(){
-      this.scene.switch('level1-scene')
+      this.scene.switch('main-menu')
    }
 
   

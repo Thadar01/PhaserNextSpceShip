@@ -7,7 +7,7 @@ export default class Laser extends Phaser.Physics.Arcade.Sprite {
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y, 'laser');
 
-    this.speed = Phaser.Math.GetSpeed(500, 1);
+    this.speed = Phaser.Math.GetSpeed(1000, 1);
     this.setScale(1.5);
   }
 

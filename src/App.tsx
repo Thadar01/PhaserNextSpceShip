@@ -1,5 +1,6 @@
 import { useRef} from 'react';
 import { IRefPhaserGame, PhaserGame } from './game/PhaserGame';
+import Link from 'next/link';
 
 function App()
 {
@@ -17,7 +18,6 @@ function App()
     return (
         <div id="app">
             <PhaserGame ref={phaserRef}  />
-           
         </div>
     )
 }

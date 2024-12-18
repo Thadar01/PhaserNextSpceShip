@@ -164,8 +164,11 @@ export default class Level1Scene extends Phaser.Scene {
                         }
 
                         this.inputEnabled = false;
-                    }else if(choose[i].texture.key !== questions[0][this.questionNo]){
-                        this.scene.switch('end')
+                    }else{
+                        this.chooseA?.setVelocity(0,0)
+                        this.chooseB?.setVelocity(0,0)
+                        this.inputEnabled=false
+
                     }
                     
                 }
